@@ -4,6 +4,7 @@ import com.example.wx.demo.Models.BackInfo;
 import com.example.wx.demo.Services.UserInfoServices;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.models.Response;
 import org.hibernate.annotations.Sort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,8 +31,9 @@ public class UserInfoController {
     @GetMapping("/login/{userName}/{password}")
     @ApiOperation(value = "用户名密码登录", notes = "getUserInfo", produces = "application/json;charset=UTF-8")
     public ResponseEntity<BackInfo> loginByUserNameAndPassword(@RequestParam String userName, @RequestParam String password) {
-       BackInfo result = userInfoServices.loginByUserNameAndUserPassword(userName,password);
-       return ResponseEntity.status(HttpStatus.OK).body(result);
+        BackInfo result = userInfoServices.loginByUserNameAndUserPassword(userName,password);
+        HttpStatus status = result != null ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
+       return new ResponseEntity<BackInfo>(result, status);
     }
 
     @GetMapping("/userInfo/{page}/{size}")

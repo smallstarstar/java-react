@@ -1,6 +1,7 @@
 package com.example.wx.demo.Controller;
 import com.example.wx.demo.Entity.UserEntity;
 import com.example.wx.demo.Models.BackInfo;
+import com.example.wx.demo.Models.UserInfo;
 import com.example.wx.demo.Services.UserInfoServices;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,8 +33,17 @@ public class UserInfoController {
     @ApiOperation(value = "用户名密码登录", notes = "getUserInfo", produces = "application/json;charset=UTF-8")
     public ResponseEntity<BackInfo> loginByUserNameAndPassword(@RequestParam String userName, @RequestParam String password) {
         BackInfo result = userInfoServices.loginByUserNameAndUserPassword(userName,password);
-        HttpStatus status = result != null ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
+        HttpStatus status = result.getUserEntity() != null ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
        return new ResponseEntity<BackInfo>(result, status);
+    }
+
+
+    @PostMapping(value = "/userInfo")
+    @ApiOperation(value = "新用户注册", notes = "registory", produces = "application/json;charset=UTF-8")
+    public ResponseEntity<BackInfo> newUserInfoRegistory(@RequestBody UserInfo userInfo) {
+        BackInfo result = userInfoServices.registoryUserInfo(userInfo);
+        HttpStatus status = result != null ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
+        return new ResponseEntity<BackInfo>(result, status);
     }
 
     @GetMapping("/userInfo/{page}/{size}")

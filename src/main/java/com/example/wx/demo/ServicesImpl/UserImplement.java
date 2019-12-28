@@ -1,6 +1,7 @@
 package com.example.wx.demo.ServicesImpl;
 
 import com.example.wx.demo.Entity.UserEntity;
+import com.example.wx.demo.Mapper.UserInfoMapper;
 import com.example.wx.demo.Models.BackInfo;
 import com.example.wx.demo.Models.UserInfo;
 import com.example.wx.demo.Respontory.UserRepository;
@@ -29,6 +30,9 @@ public class UserImplement implements UserInfoServices {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserInfoMapper userInfoMapper;
+
     @Override
     public BackInfo     loginByUserNameAndUserPassword(String userName, String password) {
         BackInfo backInfo = new BackInfo();
@@ -49,11 +53,8 @@ public class UserImplement implements UserInfoServices {
     @Override
     public BackInfo registoryUserInfo(UserInfo userInfo) {
         BackInfo backInfo = new BackInfo();
-        UserEntity userEntity  = new UserEntity();
+        UserEntity userEntity = userInfoMapper.ModelToEntity(userInfo);
         userEntity.setId(UUID.randomUUID().toString());
-        userEntity.setUserName(userInfo.getUserName());
-        userEntity.setPassword(userInfo.getPassword());
-        userEntity.setRoleId(userInfo.getRoleId());
         UserEntity result = userRepository.save(userEntity);
         backInfo.setUserEntity(result);
         backInfo.setCode(REGISTORYUSERINFO);

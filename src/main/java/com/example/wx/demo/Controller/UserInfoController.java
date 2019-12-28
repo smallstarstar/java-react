@@ -5,8 +5,6 @@ import com.example.wx.demo.Models.UserInfo;
 import com.example.wx.demo.Services.UserInfoServices;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.models.Response;
-import org.hibernate.annotations.Sort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

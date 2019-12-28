@@ -59,10 +59,10 @@ public class TitleInfo {
     }
 
     public Date getcTime() {
-        return cTime;
+        return new Date();
     }
 
     public void setcTime(Date cTime) {
-        this.cTime = cTime;
+        this.cTime = new Date();
     }
 }

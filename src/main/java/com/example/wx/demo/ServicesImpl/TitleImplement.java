@@ -1,6 +1,7 @@
 package com.example.wx.demo.ServicesImpl;
 
 import com.example.wx.demo.Entity.TitleNameEntity;
+import com.example.wx.demo.Mapper.TitleInfoMapper;
 import com.example.wx.demo.Models.TitleInfo;
 import com.example.wx.demo.Respontory.TitleNameRepository;
 import com.example.wx.demo.Services.TitleNameServices;
@@ -20,6 +21,8 @@ public class TitleImplement implements TitleNameServices {
 
     @Autowired
     private TitleNameRepository titleNameRepository;
+    @Autowired
+    private TitleInfoMapper titleInfoMapper;
 
     @Override
     public Boolean saveTitleName(TitleInfo titleInfo) {
@@ -28,15 +31,9 @@ public class TitleImplement implements TitleNameServices {
         if(data != null) {
             return false;
         } else {
-            TitleNameEntity titleNameEntity = new TitleNameEntity();
+            TitleNameEntity titleNameEntity = titleInfoMapper.ModelToEntity(titleInfo);
             titleNameEntity.setId(UUID.randomUUID().toString());
-            titleNameEntity.setCreatedPerId(titleInfo.getCreatedPerId());
-            titleNameEntity.setCreatedPerson(titleInfo.getCreatedPerson());
-            titleNameEntity.setcTime(new Date());
-            titleNameEntity.setTitleName(titleInfo.getTitleName());
-            titleNameEntity.setTitleType(titleInfo.getTitleType());
-            titleNameEntity.setCreatedRoleId(titleInfo.getCreatedRoleId());
-            TitleNameEntity result = titleNameRepository.save(titleNameEntity);
+            titleNameRepository.save(titleNameEntity);
             return true;
         }
     }
@@ -45,5 +42,19 @@ public class TitleImplement implements TitleNameServices {
     public List<TitleNameEntity> getListTitleName() {
         List<TitleNameEntity> result = titleNameRepository.findAll();
         return result;
+    }
+
+    @Override
+    public Boolean deleteTitleNameById(String id) {
+        titleNameRepository.deleteById(id);
+        return true;
+    }
+
+    @Override
+    public TitleNameEntity upDataTitleById(String id, TitleInfo titleInfo) {
+        TitleNameEntity titleNameEntity = titleInfoMapper.ModelToEntity(titleInfo);
+        titleNameEntity.setId(id);
+        titleNameRepository.saveAndFlush(titleNameEntity);
+        return titleNameEntity;
     }
 }

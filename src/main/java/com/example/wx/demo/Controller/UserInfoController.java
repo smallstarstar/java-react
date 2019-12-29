@@ -44,6 +44,13 @@ public class UserInfoController {
         return new ResponseEntity<BackInfo>(result, status);
     }
 
+    @PutMapping(value = "/updataUserInfo/{id}")
+    @ApiOperation(value = "更新用户个人信息", notes = "upDataUserInfoMessage", produces = "application/json;charset=UTF-8")
+    public ResponseEntity<Boolean>UpdateUserInfoMessage(@RequestParam String id, @RequestBody UserInfo userInfo) {
+        Boolean result = userInfoServices.upDataUserInfo(id, userInfo);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
     @GetMapping("/userInfo/{page}/{size}")
     @ApiOperation(value = "用户信息分页", notes = "getUserInfoByPageAndSize", produces = "application/json;charset=UTF-8")
     public ResponseEntity<Page<UserEntity>> getUerInfoByPageSize(@RequestParam(value = "page", defaultValue = "1") int page,

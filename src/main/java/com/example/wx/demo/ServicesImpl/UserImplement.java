@@ -63,6 +63,14 @@ public class UserImplement implements UserInfoServices {
     }
 
     @Override
+    public Boolean upDataUserInfo(String id, UserInfo userInfo) {
+        UserEntity userEntity = userInfoMapper.ModelToEntity(userInfo);
+        userEntity.setId(id);
+        userRepository.saveAndFlush(userEntity);
+        return true;
+    }
+
+    @Override
     public Page getUserInfoList(int page, int size) {
         //  Sort.Direction.DESC, "roleId" 表示根据那个字段排序
         Pageable pageable = PageRequest.of(page-1, size, Sort.Direction.DESC, "roleId");

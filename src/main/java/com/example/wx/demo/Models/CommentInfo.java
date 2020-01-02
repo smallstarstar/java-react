@@ -3,7 +3,7 @@ package com.example.wx.demo.Models;
 import io.swagger.annotations.ApiModel;
 
 @ApiModel
-public class EvenationInfo {
+public class CommentInfo {
     private String personId;
     private String articleId;
     private long detailInfo;

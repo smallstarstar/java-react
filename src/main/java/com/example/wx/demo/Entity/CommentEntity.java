@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Table(name = "even_info")
 @Entity
-public class EvenationEntity {
+public class CommentEntity {
     @Id
     @Column(name = "id", nullable = false)
     private String id;

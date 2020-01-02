@@ -3,6 +3,7 @@ package com.example.wx.demo.Controller;
 import com.example.wx.demo.Entity.ArticleEntity;
 import com.example.wx.demo.Models.ArticleInfo;
 import com.example.wx.demo.Services.ArticleServices;
+import com.example.wx.demo.Utils.PageBean;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +39,9 @@ public class ArticleController {
 
     @GetMapping("/articleInfo/{page}/{size}")
     @ApiOperation(value = "文章分页获取", notes = "getArticleInfoByPageAndSize", produces = "application/json;charset=UTF-8")
-    public ResponseEntity<Page<ArticleEntity>> getUerInfoByPageSize(@RequestParam(value = "page", defaultValue = "1") int page,
-                                                                 @RequestParam(value = "size", defaultValue = "5") int size) {
-        Page<ArticleEntity> result = articleServices.getArticleByPageAndSize(page,size);
+    public ResponseEntity<PageBean<ArticleEntity>> getUerInfoByPageSize(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                                        @RequestParam(value = "size", defaultValue = "5") int size) {
+        PageBean<ArticleEntity> result = articleServices.getArticleByPageAndSize(page,size);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 }

@@ -3,10 +3,10 @@ import com.example.wx.demo.Entity.UserEntity;
 import com.example.wx.demo.Models.BackInfo;
 import com.example.wx.demo.Models.UserInfo;
 import com.example.wx.demo.Services.UserInfoServices;
+import com.example.wx.demo.Utils.PageBean;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,9 +53,9 @@ public class UserInfoController {
 
     @GetMapping("/userInfo/{page}/{size}")
     @ApiOperation(value = "用户信息分页", notes = "getUserInfoByPageAndSize", produces = "application/json;charset=UTF-8")
-    public ResponseEntity<Page<UserEntity>> getUerInfoByPageSize(@RequestParam(value = "page", defaultValue = "1") int page,
-                                                                 @RequestParam(value = "size", defaultValue = "5") int size) {
-        Page<UserEntity> result = userInfoServices.getUserInfoList(page,size);
+    public ResponseEntity<PageBean<UserEntity>> getUerInfoByPageSize(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                                     @RequestParam(value = "size", defaultValue = "5") int size) {
+        PageBean<UserEntity> result = userInfoServices.getUserInfoList(page,size);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 

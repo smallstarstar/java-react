@@ -6,6 +6,7 @@ import com.example.wx.demo.Models.BackInfo;
 import com.example.wx.demo.Models.UserInfo;
 import com.example.wx.demo.Respontory.UserRepository;
 import com.example.wx.demo.Services.UserInfoServices;
+import com.example.wx.demo.Utils.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -71,10 +72,15 @@ public class UserImplement implements UserInfoServices {
     }
 
     @Override
-    public Page getUserInfoList(int page, int size) {
+    public PageBean getUserInfoList(int page, int size) {
         //  Sort.Direction.DESC, "roleId" 表示根据那个字段排序
+        PageBean pageBean = new PageBean();
         Pageable pageable = PageRequest.of(page-1, size, Sort.Direction.DESC, "roleId");
         Page result = userRepository.findAll(pageable);
-        return result;
+        pageBean.setList(result.getContent());
+        pageBean.setCurrentPage(result.getTotalPages());
+        pageBean.setCurrentSize(result.getSize());
+        pageBean.setTotal(result.getTotalElements());
+        return pageBean;
     }
 }

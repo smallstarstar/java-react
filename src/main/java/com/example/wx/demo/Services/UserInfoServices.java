@@ -1,10 +1,9 @@
 package com.example.wx.demo.Services;
 
-import com.example.wx.demo.Entity.UserEntity;
+
 import com.example.wx.demo.Models.BackInfo;
 import com.example.wx.demo.Models.UserInfo;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Sort;
+import com.example.wx.demo.Utils.PageBean;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,5 +15,5 @@ public interface UserInfoServices {
     // 修改个人信息资料
     Boolean upDataUserInfo(String id, UserInfo userInfo);
     // 分页获取用户列表
-    Page getUserInfoList(int page, int size);
+    PageBean getUserInfoList(int page, int size);
 }

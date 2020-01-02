@@ -5,6 +5,7 @@ import com.example.wx.demo.Mapper.ArticleInfoMapper;
 import com.example.wx.demo.Models.ArticleInfo;
 import com.example.wx.demo.Respontory.ArticleRepository;
 import com.example.wx.demo.Services.ArticleServices;
+import com.example.wx.demo.Utils.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,11 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -55,9 +53,14 @@ public class ArticleImplement implements ArticleServices {
     }
 
     @Override
-    public Page getArticleByPageAndSize(int page, int size) {
+    public PageBean getArticleByPageAndSize(int page, int size) {
+        PageBean pageBean = new PageBean();
         Pageable pageable = PageRequest.of(page-1, size, Sort.Direction.DESC, "cTime");
         Page result = articleRepository.findAll(pageable);
-        return result;
+        pageBean.setList(result.getContent());
+        pageBean.setTotal(result.getTotalElements());
+        pageBean.setCurrentSize(result.getSize());
+        pageBean.setCurrentPage(result.getTotalPages());
+        return pageBean;
     }
 }

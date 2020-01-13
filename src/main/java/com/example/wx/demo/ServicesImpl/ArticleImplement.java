@@ -1,9 +1,11 @@
 package com.example.wx.demo.ServicesImpl;
 
 import com.example.wx.demo.Entity.ArticleEntity;
+import com.example.wx.demo.Entity.UserEntity;
 import com.example.wx.demo.Mapper.ArticleInfoMapper;
 import com.example.wx.demo.Models.ArticleInfo;
 import com.example.wx.demo.Respontory.ArticleRepository;
+import com.example.wx.demo.Respontory.UserRepository;
 import com.example.wx.demo.Services.ArticleServices;
 import com.example.wx.demo.Utils.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -26,6 +30,8 @@ public class ArticleImplement implements ArticleServices {
     private ArticleRepository articleRepository;
     @Autowired
     private ArticleInfoMapper articleInfoMapper;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public ArticleEntity saveArticleMessage(ArticleInfo articleInfo) {

@@ -44,4 +44,15 @@ public class ArticleController {
         PageBean<ArticleEntity> result = articleServices.getArticleByPageAndSize(page,size);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
+
+    @GetMapping("/myArticleInfo/{id}/{page}/{size}")
+    @ApiOperation(value = "根据用户的id获取文章分页获取", notes = "getArticleInfoByPersonalIdPageAndSize", produces = "application/json;charset=UTF-8")
+    public ResponseEntity<PageBean<ArticleEntity>> getUerInfoByCurrentIdPageSize(
+            @RequestParam String id,
+            @RequestParam(value = "page", defaultValue = "1", required = false) Integer page,
+            @RequestParam(value = "size", defaultValue = "5", required = false) Integer size
+    ) {
+        PageBean<ArticleEntity> result = articleServices.getOwnArticleByPageAndSize(id, page,size);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
 }

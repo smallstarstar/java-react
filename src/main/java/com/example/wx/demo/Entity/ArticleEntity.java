@@ -26,13 +26,14 @@ public class ArticleEntity {
     private String subTypeId;
 
     @Column(name = "c_time")
-    private Date cTime;
+    private long cTime;
 
     @Column(name = "a_stars")
     private String stars;
 
     @Column(name = "l_times")
     private String looks;
+
     @Column(name = "d_text")
     private String desc;
 
@@ -85,11 +86,11 @@ public class ArticleEntity {
     }
 
 
-    public Date getcTime() {
+    public long getcTime() {
         return cTime;
     }
 
-    public void setcTime(Date cTime) {
+    public void setcTime(long cTime) {
         this.cTime = cTime;
     }
 

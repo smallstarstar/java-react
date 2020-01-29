@@ -29,7 +29,7 @@ public class Swagger2Config {
         return new ApiInfoBuilder()
                 //页面标题
                 .title("Spring Boot 使用 Swagger2 构建RESTful API")
-                .description("API 描述")
+                 .description("API 描述")
                 .build();
     }
 

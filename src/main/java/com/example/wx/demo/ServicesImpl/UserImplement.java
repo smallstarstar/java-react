@@ -35,7 +35,7 @@ public class UserImplement implements UserInfoServices {
     private UserInfoMapper userInfoMapper;
 
     @Override
-    public BackInfo     loginByUserNameAndUserPassword(String userName, String password) {
+    public BackInfo loginByUserNameAndUserPassword(String userName, String password) {
         BackInfo backInfo = new BackInfo();
         UserEntity userEntity = userRepository.userLoginByUserNameAndPassword(userName, password);
         if (userEntity == null) {
@@ -52,7 +52,7 @@ public class UserImplement implements UserInfoServices {
     }
 
     @Override
-    public BackInfo registoryUserInfo(UserInfo userInfo) {
+    public BackInfo registeredUserInfo(UserInfo userInfo) {
         BackInfo backInfo = new BackInfo();
         UserEntity userEntity = userInfoMapper.ModelToEntity(userInfo);
         userEntity.setId(UUID.randomUUID().toString());
@@ -82,5 +82,11 @@ public class UserImplement implements UserInfoServices {
         pageBean.setCurrentSize(result.getSize());
         pageBean.setTotal(result.getTotalElements());
         return pageBean;
+    }
+
+    @Override
+    public UserEntity getUserInfoMessage(String id) {
+        UserEntity userEntity = userRepository.getUserInfoById(id);
+        return userEntity;
     }
 }

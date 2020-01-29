@@ -5,6 +5,8 @@ import com.example.wx.demo.Models.ArticleInfo;
 import com.example.wx.demo.Utils.PageBean;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface ArticleServices {
     // 保存发布的文章
@@ -15,4 +17,7 @@ public interface ArticleServices {
 
     // 分页展示文章
     PageBean getArticleByPageAndSize(int page, int size);
+
+    // 根据用户的id获取用户的博客
+    PageBean getOwnArticleByPageAndSize(String id, Integer page, Integer size);
 }

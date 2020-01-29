@@ -37,14 +37,14 @@ public class UserInfoController {
 
 
     @PostMapping(value = "/userInfo")
-    @ApiOperation(value = "新用户注册", notes = "registory", produces = "application/json;charset=UTF-8")
-    public ResponseEntity<BackInfo> newUserInfoRegistory(@RequestBody UserInfo userInfo) {
-        BackInfo result = userInfoServices.registoryUserInfo(userInfo);
+    @ApiOperation(value = "新用户注册", notes = "registered", produces = "application/json;charset=UTF-8")
+    public ResponseEntity<BackInfo> newUserInfoRegistered(@RequestBody UserInfo userInfo) {
+       BackInfo result = userInfoServices.registeredUserInfo(userInfo);
         HttpStatus status = result != null ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
         return new ResponseEntity<BackInfo>(result, status);
     }
 
-    @PutMapping(value = "/updataUserInfo/{id}")
+    @PutMapping(value = "/updateUserInfo/{id}")
     @ApiOperation(value = "更新用户个人信息", notes = "upDataUserInfoMessage", produces = "application/json;charset=UTF-8")
     public ResponseEntity<Boolean>UpdateUserInfoMessage(@RequestParam String id, @RequestBody UserInfo userInfo) {
         Boolean result = userInfoServices.upDataUserInfo(id, userInfo);
@@ -59,5 +59,10 @@ public class UserInfoController {
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
-
+    @GetMapping("/gerUserById/personId/{id}}")
+    @ApiOperation(value = "根据用户id获取用户信息", notes = "getUserInoByid", produces = "application/json;charset=UTF-8")
+    public ResponseEntity<UserEntity> getUserInfoByPersonId(@RequestParam String id) {
+        UserEntity result = userInfoServices.getUserInfoMessage(id);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
 }

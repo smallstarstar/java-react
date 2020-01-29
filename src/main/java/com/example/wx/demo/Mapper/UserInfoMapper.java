@@ -8,4 +8,5 @@ import org.mapstruct.Mapper;
 public interface UserInfoMapper {
     UserEntity ModelToEntity (UserInfo userInfo);
 
+    UserInfo EntityToModel (UserEntity userEntity);
 }

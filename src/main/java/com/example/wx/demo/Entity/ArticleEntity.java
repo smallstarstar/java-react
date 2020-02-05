@@ -29,10 +29,10 @@ public class ArticleEntity {
     private long cTime;
 
     @Column(name = "a_stars")
-    private String stars;
+    private int stars;
 
     @Column(name = "l_times")
-    private String looks;
+    private int looks;
 
     @Column(name = "d_text")
     private String desc;
@@ -94,19 +94,19 @@ public class ArticleEntity {
         this.cTime = cTime;
     }
 
-    public String getStars() {
+    public int getStars() {
         return stars;
     }
 
-    public void setStars(String stars) {
+    public void setStars(int stars) {
         this.stars = stars;
     }
 
-    public String getLooks() {
+    public int getLooks() {
         return looks;
     }
 
-    public void setLooks(String looks) {
+    public void setLooks(int looks) {
         this.looks = looks;
     }
 }

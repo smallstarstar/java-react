@@ -20,4 +20,10 @@ public interface ArticleServices {
 
     // 根据用户的id获取用户的博客
     PageBean getOwnArticleByPageAndSize(String id, Integer page, Integer size);
+
+    // 更新文章的查看量
+    Boolean UpdateArticleLooksById(String id);
+
+    // 更新文章的收藏
+    Boolean UpdateArticleStars(String id);
 }

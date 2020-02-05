@@ -8,9 +8,7 @@ import com.example.wx.demo.Services.TitleNameServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 

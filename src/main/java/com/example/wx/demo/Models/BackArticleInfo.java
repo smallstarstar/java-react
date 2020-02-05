@@ -12,6 +12,16 @@ public class BackArticleInfo {
 
     private UserImg userImg;
 
+    private Number commentList;
+
+    public Number getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(Number commentList) {
+        this.commentList = commentList;
+    }
+
     public ArticleEntity getArticleEntity() {
         return articleEntity;
     }

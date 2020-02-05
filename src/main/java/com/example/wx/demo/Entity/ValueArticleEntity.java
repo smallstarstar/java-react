@@ -5,10 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
-@Table(name = "even_info")
+@Table(name = "value_info")
 @Entity
-public class CommentEntity {
+public class ValueArticleEntity {
     @Id
     @Column(name = "id", nullable = false)
     private String id;
@@ -16,14 +15,8 @@ public class CommentEntity {
     @Column(name = "per_id")
     private String personId;
 
-    @Column(name = "article_id")
+    @Column(name = "ar_id")
     private String articleId;
-
-    @Column(name = "detail_info")
-    private String detailInfo;
-
-    @Column(name = "c_time")
-    private long cTime;
 
     public String getId() {
         return id;
@@ -47,21 +40,5 @@ public class CommentEntity {
 
     public void setArticleId(String articleId) {
         this.articleId = articleId;
-    }
-
-    public String getDetailInfo() {
-        return detailInfo;
-    }
-
-    public void setDetailInfo(String detailInfo) {
-        this.detailInfo = detailInfo;
-    }
-
-    public long getcTime() {
-        return cTime;
-    }
-
-    public void setcTime(long cTime) {
-        this.cTime = cTime;
     }
 }

@@ -3,7 +3,9 @@ package com.example.wx.demo.Controller;
 import com.example.wx.demo.Entity.CommentEntity;
 import com.example.wx.demo.Models.CommentInfo;
 import com.example.wx.demo.Services.CommentServices;
+import com.example.wx.demo.Utils.PageBean;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +39,16 @@ public class CommentController {
     @ApiOperation(value = "根据用户id获取用户的评论信息", notes = "getCommentInfoByPerId", produces = "application/json;charset=UTF-8")
     public ResponseEntity<List<CommentEntity>> getCommentInfoByPersonId(@RequestParam String id) {
         List<CommentEntity> result = commentServices.getCommentByPersonIdAndSizeAndPage(id);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+    @GetMapping("/commentInfo/{id}/{page}/{size}")
+    @ApiOperation(value = "根据文章的id获取文章的评论信息", notes = "getCommentInfoByArticleIdPageAndSize", produces = "application/json;charset=UTF-8")
+    public ResponseEntity<PageBean<CommentEntity>> getUerInfoByCurrentIdPageSize(
+            @RequestParam String id,
+            @RequestParam(value = "page", defaultValue = "1", required = false) Integer page,
+            @RequestParam(value = "size", defaultValue = "5", required = false) Integer size
+    ) {
+        PageBean<CommentEntity> result = commentServices.getCommentInfoByArticleId(id, page,size);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 

@@ -31,7 +31,7 @@ public class UserInfoController {
     @ApiOperation(value = "用户名密码登录", notes = "getUserInfo", produces = "application/json;charset=UTF-8")
     public ResponseEntity<BackInfo> loginByUserNameAndPassword(@RequestParam String userName, @RequestParam String password) {
         BackInfo result = userInfoServices.loginByUserNameAndUserPassword(userName,password);
-        HttpStatus status = result.getUserEntity() != null ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
+        HttpStatus status = result.getUserEntity() != null ? HttpStatus.OK : HttpStatus.NOT_FOUND;
        return new ResponseEntity<BackInfo>(result, status);
     }
 

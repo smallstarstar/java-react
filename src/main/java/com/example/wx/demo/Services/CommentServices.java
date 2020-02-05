@@ -17,4 +17,7 @@ public interface CommentServices {
 
     // 删除自己评论的信息
     Boolean deleteCommentInfoByPerId(String id);
+
+    // 根据文章的id获取评论信息
+    PageBean getCommentInfoByArticleId(String id, int page, int size);
 }

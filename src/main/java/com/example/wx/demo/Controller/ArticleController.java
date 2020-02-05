@@ -29,8 +29,8 @@ public class ArticleController {
         return new ResponseEntity<ArticleEntity>(result, status);
     }
 
-    @DeleteMapping(value = "/deleteArtice/{id}/{personId}")
-    @ApiOperation(value = "删除文章", notes = "deleteArticle", produces = "application/json;charset=UTF-8")
+    @DeleteMapping(value = "/deleteArticle/blok/{id}/person/{personId}")
+    @ApiOperation(value = "删除自己发布的文章", notes = "deleteArticle", produces = "application/json;charset=UTF-8")
     public ResponseEntity<Boolean> deleteArticleOfOwn(@RequestParam String id, @RequestParam String personId) {
         Boolean result = articleServices.deleteArticleOfOwn(id, personId);
         HttpStatus status = result ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
@@ -54,5 +54,20 @@ public class ArticleController {
     ) {
         PageBean<ArticleEntity> result = articleServices.getOwnArticleByPageAndSize(id, page,size);
         return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @PutMapping("/updateLooks/{id}")
+    @ApiOperation(value = "更新文章的阅读量", notes = "updateArticleLooks", produces = "application/json;charset=UTF-8")
+    public ResponseEntity<Boolean> updateArticleOfLooks(@RequestParam String id) {
+        Boolean  result = articleServices.UpdateArticleLooksById(id);
+        HttpStatus status = result ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
+        return new ResponseEntity<Boolean>(result, status);
+    }
+    @PutMapping("/updateStars/{id}")
+    @ApiOperation(value = "更新文章的点赞量", notes = "updateArticleStars", produces = "application/json;charset=UTF-8")
+    public ResponseEntity<Boolean> updateArticleOfStars(@RequestParam String id) {
+        Boolean  result = articleServices.UpdateArticleStars(id);
+        HttpStatus status = result ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
+        return new ResponseEntity<Boolean>(result, status);
     }
 }
